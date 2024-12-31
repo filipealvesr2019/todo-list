@@ -33,10 +33,10 @@ window.onload = function(){
         const checkbox = getcheckBoxInput(task);
         const list = document.getElementById('todo-list');
         const toDo = document.createElement('li');
-
+        // const button = document.createElement('button')
         toDo.id = task.id;
         toDo.appendChild(checkbox)
-
+        // toDo.appendChild(button)
         list.appendChild(toDo)
     })
 }
