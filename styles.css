@@ -81,3 +81,29 @@ main{
         cursor: pointer;
     }
 }
+#create-todo-section{
+    width: 100%;
+}
+#create-todo-form{
+    font-size: 1.6rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 1.5rem;
+}
+
+.input-description{
+    height: 3.2rem;
+    width: 100%;
+    font-size: 1.6rem;
+    border-radius: .5rem;
+    margin-right: .4rem;
+    outline: 0;
+    border: 1px solid #646464;
+    padding-left: .8rem;
+    
+
+    &:focus{
+        border: 1px solid #5eb7f6;
+    }
+}
