@@ -28,7 +28,15 @@ const getcheckBoxInput =  ({id, description, checked}) => {
 
 }
 
+
+const createTask = (event) => {
+    event.preventDefault();
+    const description = event.target.elements.description.value
+}
+
 window.onload = function(){
+    const form = document.getElementById('create-todo-form');
+    form.addEventListener('submit', createTask)
     task.forEach((task) => {
         const checkbox = getcheckBoxInput(task);
         const list = document.getElementById('todo-list');
