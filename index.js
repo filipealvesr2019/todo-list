@@ -5,6 +5,18 @@ let task = [
 
 ]
 
+
+const crateTaskListItem = (task, checkbox) => {
+    const list = document.getElementById('todo-list');
+    const toDo = document.createElement('li');
+
+    toDo.id = task.id;
+    toDo.appendChild(checkbox);
+    list.appendChild(toDo);
+
+    return toDo;
+
+}
 const getcheckBoxInput =  ({id, description, checked}) => {
     const checkbox = document.createElement('input');
     const label = document.createElement('label');
@@ -13,7 +25,7 @@ const getcheckBoxInput =  ({id, description, checked}) => {
 
     checkbox.type = 'checkbox';
     checkbox.id = checkboxId
-    checkbox.checked = checked;
+    checkbox.checked = checked || false;
 
     label.textContent = description;
     label.htmlFor = checkboxId;
@@ -29,9 +41,28 @@ const getcheckBoxInput =  ({id, description, checked}) => {
 }
 
 
+const getNewTaskId = () => {
+    const lastId = task[task.length - 1]?.id;
+    return lastId ? lastId + 1: 1 
+}
+
+
+const getNewTaskData = (event) => {
+    const description = event.target.elements.description.value;
+    const id = getNewTaskId();
+
+    return {description, id}
+}
 const createTask = (event) => {
     event.preventDefault();
-    const description = event.target.elements.description.value
+    const newTaskData = getNewTaskData(event);
+    
+    const {id, description} = newTaskData;
+
+    const checkbox = getcheckBoxInput(newTaskData)
+
+    crateTaskListItem(newTaskData, checkbox)
+    task = [...task, {id, description, checked: false}]
 }
 
 window.onload = function(){
