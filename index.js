@@ -6,13 +6,31 @@ let task = [
 ]
 
 
+
+const removeTask = (taskId) => {
+    task = task.filter(({id}) => parseInt(id) !== parseInt(taskId));
+
+    document
+    .getElementById("todo-list")
+    .removeChild(document.getElementById(taskId));
+}
+
 const crateTaskListItem = (task, checkbox) => {
     const list = document.getElementById('todo-list');
     const toDo = document.createElement('li');
 
+    const removeTaskButton = document.createElement('button');
+    removeTaskButton.textContent = 'X';
+    removeTaskButton.ariaLabel = 'Remover Tarefa';
+
+    removeTaskButton.onclick = () => removeTask(task.id);
+    
+
+
     toDo.id = task.id;
     toDo.appendChild(checkbox);
     list.appendChild(toDo);
+    toDo.appendChild(removeTaskButton)
 
     return toDo;
 
@@ -72,10 +90,16 @@ window.onload = function(){
         const checkbox = getcheckBoxInput(task);
         const list = document.getElementById('todo-list');
         const toDo = document.createElement('li');
+        const removeTaskButton = document.createElement('button');
+    
+        removeTaskButton.textContent = 'X';
+        removeTaskButton.ariaLabel = 'Remover Tarefa';
+        removeTaskButton.onclick = () => removeTask(task.id);
         // const button = document.createElement('button')
         toDo.id = task.id;
         toDo.appendChild(checkbox)
-        // toDo.appendChild(button)
+        toDo.appendChild(removeTaskButton)
         list.appendChild(toDo)
+        
     })
 }
