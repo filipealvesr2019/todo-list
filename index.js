@@ -7,6 +7,12 @@ let task = [
 
 
 
+const removeDoneTasks = () => {
+    const tasksToRemove = task
+         .filter(({checked}) => checked);
+         console.log(tasksToRemove)
+}
+
 const removeTask = (taskId) => {
     task = task.filter(({id}) => parseInt(id) !== parseInt(taskId));
 
@@ -14,6 +20,12 @@ const removeTask = (taskId) => {
     .getElementById("todo-list")
     .removeChild(document.getElementById(taskId));
 }
+
+const onCheckboxClick = (event) => {
+    const [id] = event.target.id.split('-');
+    console.log(id)
+}
+
 
 const crateTaskListItem = (task, checkbox) => {
     const list = document.getElementById('todo-list');
@@ -44,7 +56,7 @@ const getcheckBoxInput =  ({id, description, checked}) => {
     checkbox.type = 'checkbox';
     checkbox.id = checkboxId
     checkbox.checked = checked || false;
-
+    checkbox.addEventListener('change', onCheckboxClick)
     label.textContent = description;
     label.htmlFor = checkboxId;
 
