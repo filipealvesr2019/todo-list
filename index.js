@@ -22,8 +22,12 @@ const removeTask = (taskId) => {
 }
 
 const onCheckboxClick = (event) => {
-    const [id] = event.target.id.split('-');
-    console.log(id)
+    const [id] = event.target.id.split('-')[1];
+    task = task.map((task) => {
+        return parseInt(id) === parseInt(task.id) ? {...task, checked: event.target.checked} : task
+        
+    })
+    console.log(task)
 }
 
 
@@ -51,7 +55,7 @@ const getcheckBoxInput =  ({id, description, checked}) => {
     const checkbox = document.createElement('input');
     const label = document.createElement('label');
     const wrapper = document.createElement('div');
-    const checkboxId = `task ${id}`;
+    const checkboxId = `task-${id}`;
 
     checkbox.type = 'checkbox';
     checkbox.id = checkboxId
