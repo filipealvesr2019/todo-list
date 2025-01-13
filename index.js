@@ -9,13 +9,23 @@ let task = [
 
 const removeDoneTasks = () => {
     const tasksToRemove = task
-         .filter(({checked}) => checked);
-         console.log(tasksToRemove)
+         .filter(({checked}) => checked)
+         .map(({id}) => id)
+
+         task = task.filter(({checked}) => !checked);
+         tasksToRemove.forEach((taskToRemove) => {
+            const elementToRemove = document.getElementById(taskToRemove)
+            if(elementToRemove){
+                document.getElementById("todo-list").removeChild(elementToRemove)
+
+            }
+         })
 }
 
 const removeTask = (taskId) => {
-    task = task.filter(({id}) => parseInt(id) !== parseInt(taskId));
-
+    task = task
+        .filter(({id}) => parseInt(id) !== parseInt(taskId))
+       
     document
     .getElementById("todo-list")
     .removeChild(document.getElementById(taskId));
