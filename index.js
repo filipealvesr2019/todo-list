@@ -6,6 +6,10 @@ let task = [
 ]
 
 
+const setTasksInLocalStorage = (task) => {
+    window.localStorage.setItem('task', JSON.stringify(task))
+}
+
 
 const removeDoneTasks = () => {
     const tasksToRemove = task
@@ -23,8 +27,8 @@ const removeDoneTasks = () => {
 }
 
 const removeTask = (taskId) => {
-    task = task
-        .filter(({id}) => parseInt(id) !== parseInt(taskId))
+   task = task.filter(({id}) => parseInt(id) !== parseInt(taskId));
+    setTasksInLocalStorage(task)
        
     document
     .getElementById("todo-list")
