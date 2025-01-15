@@ -1,22 +1,23 @@
-let task = [
-    {id: 1 , description:'compra pão' , checked: false},
-    {id: 2, description: 'passear com o cachorro', checked: false},
-    {id: 3, description: 'fazer o almoço', checked: false }
-
-]
 
 
+const getTaskLocalStorage = () => {
+    const localTasks = JSON.parse(window.localStorage.getItem('tasks'));
+    return localTasks ? localTasks : [];
+}
 const setTasksInLocalStorage = (task) => {
     window.localStorage.setItem('task', JSON.stringify(task))
 }
 
 
 const removeDoneTasks = () => {
-    const tasksToRemove = task
+
+    const tasks = getTaskLocalStorage();
+    const tasksToRemove = tasks
          .filter(({checked}) => checked)
          .map(({id}) => id)
 
-         task = task.filter(({checked}) => !checked);
+       const getUpdatedTasks = tasks.filter(({checked}) => !checked);
+       setTasksInLocalStorage(getUpdatedTasks)
          tasksToRemove.forEach((taskToRemove) => {
             const elementToRemove = document.getElementById(taskToRemove)
             if(elementToRemove){
@@ -27,8 +28,10 @@ const removeDoneTasks = () => {
 }
 
 const removeTask = (taskId) => {
-   task = task.filter(({id}) => parseInt(id) !== parseInt(taskId));
-    setTasksInLocalStorage(task)
+
+    const tasks = getTaskLocalStorage();
+   const getUpdatedTasks = tasks.filter(({id}) => parseInt(id) !== parseInt(taskId));
+    setTasksInLocalStorage(getUpdatedTasks)
        
     document
     .getElementById("todo-list")
@@ -36,12 +39,14 @@ const removeTask = (taskId) => {
 }
 
 const onCheckboxClick = (event) => {
+    const tasks = getTaskLocalStorage();
+
     const [id] = event.target.id.split('-')[1];
-    task = task.map((task) => {
+    const getUpdatedTasks = tasks.map((task) => {
         return parseInt(id) === parseInt(task.id) ? {...task, checked: event.target.checked} : task
         
     })
-    console.log(task)
+    setTasksInLocalStorage(getUpdatedTasks)
 }
 
 
@@ -121,6 +126,8 @@ window.onload = function(){
         const list = document.getElementById('todo-list');
         const toDo = document.createElement('li');
         const removeTaskButton = document.createElement('button');
+        const tasks = getTaskLocalStorage();
+
     
         removeTaskButton.textContent = 'X';
         removeTaskButton.ariaLabel = 'Remover Tarefa';
