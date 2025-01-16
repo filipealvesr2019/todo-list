@@ -119,6 +119,7 @@ const createTask = (event) => {
     crateTaskListItem(newTaskData, checkbox)
     const upadatedTasks = [...tasks, {id, description, checked: false}]
     setTasksInLocalStorage(upadatedTasks)
+    document.getElementById('description').value = ''
 }
 
 window.onload = function(){
