@@ -4,8 +4,8 @@ const getTaskLocalStorage = () => {
     const localTasks = JSON.parse(window.localStorage.getItem('tasks'));
     return localTasks ? localTasks : [];
 }
-const setTasksInLocalStorage = (task) => {
-    window.localStorage.setItem('task', JSON.stringify(task))
+const setTasksInLocalStorage = (tasks) => {
+    window.localStorage.setItem('tasks', JSON.stringify(tasks))
 }
 
 
@@ -95,7 +95,8 @@ const getcheckBoxInput =  ({id, description, checked}) => {
 
 
 const getNewTaskId = () => {
-    const lastId = task[task.length - 1]?.id;
+    const tasks = getTaskLocalStorage()
+    const lastId = tasks[tasks.length - 1]?.id;
     return lastId ? lastId + 1: 1 
 }
 
@@ -113,20 +114,23 @@ const createTask = (event) => {
     const {id, description} = newTaskData;
 
     const checkbox = getcheckBoxInput(newTaskData)
+    const tasks = getTaskLocalStorage()
 
     crateTaskListItem(newTaskData, checkbox)
-    task = [...task, {id, description, checked: false}]
+    const upadatedTasks = [...tasks, {id, description, checked: false}]
+    setTasksInLocalStorage(upadatedTasks)
 }
 
 window.onload = function(){
     const form = document.getElementById('create-todo-form');
     form.addEventListener('submit', createTask)
-    task.forEach((task) => {
+    const tasks = getTaskLocalStorage();
+
+    tasks.forEach((task) => {
         const checkbox = getcheckBoxInput(task);
         const list = document.getElementById('todo-list');
         const toDo = document.createElement('li');
         const removeTaskButton = document.createElement('button');
-        const tasks = getTaskLocalStorage();
 
     
         removeTaskButton.textContent = 'X';
