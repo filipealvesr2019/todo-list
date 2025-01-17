@@ -1,5 +1,11 @@
 
 
+const createdTaskInfo = (event) => new Promise((resolve) => {
+    setTimeout( () => {
+        resolve(getNewTaskData(event))
+    }, 3000)
+})
+
 const getTaskLocalStorage = () => {
     const localTasks = JSON.parse(window.localStorage.getItem('tasks'));
     return localTasks ? localTasks : [];
@@ -107,9 +113,9 @@ const getNewTaskData = (event) => {
 
     return {description, id}
 }
-const createTask = (event) => {
+const createTask = async (event) => {
     event.preventDefault();
-    const newTaskData = getNewTaskData(event);
+    const newTaskData = await createdTaskInfo(event);
     
     const {id, description} = newTaskData;
 
