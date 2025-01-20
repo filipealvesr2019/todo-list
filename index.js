@@ -115,6 +115,7 @@ const getNewTaskData = (event) => {
 }
 const createTask = async (event) => {
     event.preventDefault();
+    document.getElementById('save-task').setAttribute('disabled', true)
     const newTaskData = await createdTaskInfo(event);
     
     const {id, description} = newTaskData;
@@ -126,6 +127,8 @@ const createTask = async (event) => {
     const upadatedTasks = [...tasks, {id, description, checked: false}]
     setTasksInLocalStorage(upadatedTasks)
     document.getElementById('description').value = ''
+    document.getElementById('save-task').removeAttribute('disabled', false)
+
 }
 
 window.onload = function(){
