@@ -1,4 +1,16 @@
 
+const renderTaskProgressData = (tasks) => {
+    let tasksProgress;
+    const taskProgressDOM = document.getElementById('tasksProgress');
+
+    if(taskProgressDOM) tasksProgress = taskProgressDOM;
+    else {
+        const newTaskProgressDOM = document.createElement('div');
+        newTaskProgressDOM.id = 'tasksProgress';
+        document.getElementById('todo-footer').appendChild(newTaskProgressDOM)
+
+    }
+}
 
 const createdTaskInfo = (event) => new Promise((resolve) => {
     setTimeout( () => {
