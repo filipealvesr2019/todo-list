@@ -7,7 +7,11 @@ const renderTaskProgressData = (tasks) => {
     else {
         const newTaskProgressDOM = document.createElement('div');
         newTaskProgressDOM.id = 'tasksProgress';
-        document.getElementById('todo-footer').appendChild(newTaskProgressDOM)
+        document.getElementById('todo-footer').appendChild(newTaskProgressDOM);
+        tasksProgress = newTaskProgressDOM;
+        const doneTask = tasks.filter(({checked}) => checked).length;
+        const totalTasks = tasks.length
+        tasksProgress.textContent = `${doneTask}/${totalTasks} concluidas`
 
     }
 }
@@ -165,4 +169,7 @@ window.onload = function(){
         list.appendChild(toDo)
         
     })
+
+    renderTaskProgressData(tasks)
+
 }
