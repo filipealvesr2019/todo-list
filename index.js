@@ -47,6 +47,8 @@ const removeDoneTasks = () => {
 
             }
          })
+  // Atualiza o progresso das tarefas
+  renderTaskProgressData(getUpdatedTasks);
 }
 
 const removeTask = (taskId) => {
@@ -58,6 +60,9 @@ const removeTask = (taskId) => {
     document
     .getElementById("todo-list")
     .removeChild(document.getElementById(taskId));
+
+     // Atualiza o progresso das tarefas
+     renderTaskProgressData(getUpdatedTasks);
 }
 
 const onCheckboxClick = (event) => {
@@ -69,6 +74,9 @@ const onCheckboxClick = (event) => {
         
     })
     setTasksInLocalStorage(getUpdatedTasks)
+
+    // Atualiza o progresso das tarefas
+    renderTaskProgressData(getUpdatedTasks);
 }
 
 
@@ -119,7 +127,8 @@ const getcheckBoxInput =  ({id, description, checked}) => {
 const getNewTaskId = () => {
     const tasks = getTaskLocalStorage()
     const lastId = tasks[tasks.length - 1]?.id;
-    return lastId ? lastId + 1: 1 
+    return lastId ? lastId + 1: 1  
+    
 }
 
 
@@ -144,6 +153,8 @@ const createTask = async (event) => {
     setTasksInLocalStorage(upadatedTasks)
     document.getElementById('description').value = ''
     document.getElementById('save-task').removeAttribute('disabled', false)
+    renderTaskProgressData(upadatedTasks)
+
 
 }
 
@@ -169,7 +180,6 @@ window.onload = function(){
         list.appendChild(toDo)
         
     })
-
-    renderTaskProgressData(tasks)
-
+  // Atualiza o progresso das tarefas
+  renderTaskProgressData(tasks);
 }
