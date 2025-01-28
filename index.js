@@ -1,20 +1,20 @@
 
 const renderTaskProgressData = (tasks) => {
-    let tasksProgress;
-    const taskProgressDOM = document.getElementById('tasksProgress');
+    let tasksProgress = document.getElementById('tasksProgress');
 
-    if(taskProgressDOM) tasksProgress = taskProgressDOM;
-    else {
-        const newTaskProgressDOM = document.createElement('div');
-        newTaskProgressDOM.id = 'tasksProgress';
-        document.getElementById('todo-footer').appendChild(newTaskProgressDOM);
-        tasksProgress = newTaskProgressDOM;
-        const doneTask = tasks.filter(({checked}) => checked).length;
-        const totalTasks = tasks.length
-        tasksProgress.textContent = `${doneTask}/${totalTasks} concluidas`
-
+    // Cria o elemento, caso não exista
+    if (!tasksProgress) {
+        tasksProgress = document.createElement('div');
+        tasksProgress.id = 'tasksProgress';
+        document.getElementById('todo-footer').appendChild(tasksProgress);
     }
-}
+
+    // Atualiza o texto de progresso
+    const doneTask = tasks.filter(({ checked }) => checked).length;
+    const totalTasks = tasks.length;
+    tasksProgress.textContent = `${doneTask}/${totalTasks} concluidas`;
+};
+
 
 const createdTaskInfo = (event) => new Promise((resolve) => {
     setTimeout( () => {
